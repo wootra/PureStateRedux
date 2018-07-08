@@ -56,19 +56,32 @@ README.md
 package.json
 ```
 
-For the project to build, **these files must exist with exact filenames**:
+For the project to build :
 * run `npm install`
 
-## Available Scripts
+## Development / Debugging environment
 
-if you install the extension "Debugger for chrome" on your VSCode, 
-you can simply press F5 to run debugging mode.
-and it also run your chrome before the start script run 'npm start'.
-
+I configured development and debugging environment in VSCode, So you can just press F5 to debug the project if you install the extension "Debugger for chrome" on your VSCode.
+When you press F5, it will launch 'npm start' before the chrome browser is automatically opened.
 
 ## Supported Browsers
 
-PureStateRedux is developped by pure javascript with React, So if you can use React, it will run.
+PureStateRedux is developped by pure javascript with React, So if you can use React, it will run also. But I am not sure if this module would work for all javascript version. Please let me know if there some problem.
+I have tested at React 16.4.1.
+
+Here is all dependencies that I have used when I was developing it.
+```
+"axios": "^0.18.0",
+"react": "^16.4.1",
+"react-dom": "^16.4.1",
+"react-router": "^4.3.1",
+"react-router-dom": "^4.3.1",
+"react-scripts": "^1.1.4",
+"redux": "^4.0.0",
+"redux-promise": "^0.6.0"
+
+```
+
 
 ## How to use PureStateRedux
 

@@ -35,6 +35,17 @@ public/
   favicon.ico
   manifest.json
 src/
+  actions/
+    index.js
+  components
+    Receiver.js
+	Sender.js
+	SendReceiver.js
+	index.js
+  pureStateRedux/
+    index.js
+  reducers/
+    index.js
   App.css
   App.js
   App.test.js

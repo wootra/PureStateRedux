@@ -48,11 +48,11 @@ public/
 src/
   actions/
     index.js
-  components
+  components/
     Receiver.js
-	Sender.js
-	SendReceiver.js
-	index.js
+    Sender.js
+    SendReceiver.js
+    index.js
   pureStateRedux/
     index.js
   reducers/

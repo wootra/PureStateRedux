@@ -7,6 +7,17 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
+- [Folder Structure](#folder-structure)
+- [Development / Debugging environment](#development--debugging-environment)
+- [Supported Browsers](#supported-browsers)
+- [How to use PureStateRedux](#how-to-use-purestateredux)
+- [actions/index.js](#actionsindexjs)
+- [reducers/index.js](#reducersindexjs)
+- [components/Sender.js](#componentssenderjs)
+- [components/Receiver.js](#componentsreceiverjs)
+- [components/SendReceiver.js](#componentssendreceiverjs)
+- [components/index.js](#componentsindexjs)
+- [Something Missing?](#something-missing)
 
 
 ## Updating to New Releases

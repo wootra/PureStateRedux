@@ -1,4 +1,4 @@
-const PureStateRedux = function(){
+const PureStateRedux = function(name){
     const reducers = [];
     const receivers = [];
     
@@ -9,7 +9,7 @@ const PureStateRedux = function(){
             runCallbacks(actionWrapper.curr_state);
         }
     }
-    function requestAction(actionWrapper, reducer){
+    async function requestAction(actionWrapper, reducer){
         let typeOfAction = typeof(actionWrapper.action);
         if(typeOfAction !== "function"){
             throw "action is not a function";
@@ -18,13 +18,13 @@ const PureStateRedux = function(){
 
         if(retObj.payload && retObj.type){
             if(retObj.payload.then){//check if it is promise result
-                retObj.payload
+                await retObj.payload
                 .then((resp)=>
                     reducer(retObj.type,resp))
                 .then(ret=>changeCurrState(actionWrapper,ret));
             }else{
                 let ret = reducer(retObj.type, retObj.payload);
-                changeCurrState(actionWrapper,ret);
+                await changeCurrState(actionWrapper,ret);
             }
         }else{
             throw "action return type os not right. return {type:'action_type', payload:{promise ret or object}";
@@ -53,11 +53,24 @@ const PureStateRedux = function(){
         }
     };
     return {
+        name:name,
         addReducers:function(reducer){
             reducers.push(reducer);
         },
         redux:redux,
-        connect: function(stateToPropMap, stateToDispatchMap, obj){
+        runAction:function(obj, actionCreator, value){
+            //let type,payload;
+            //({type,payload} = {...action});
+            let actionWrapper = {
+                count:0,
+                state:{props:{...obj.state.props}},
+                value:value,
+                action:actionCreator
+            }
+            redux.runReducers(actionWrapper);
+            //obj.setState(obj.state);
+        },
+        connect: function(stateToPropMap, obj, addRunAction){
             if(stateToPropMap){
                 receivers.push({
                     obj:obj,
@@ -69,8 +82,8 @@ const PureStateRedux = function(){
                 else
                     obj.state = {...obj.state, props: {...stateToPropMap(obj.state)}};
             }
-            if(stateToDispatchMap){
-                
+            if(addRunAction){
+                //this function only can be used for single redux.
                 obj.runAction = function(actionCreator, value){
                     //let type,payload;
                     //({type,payload} = {...action});
@@ -91,4 +104,4 @@ const PureStateRedux = function(){
     
 }
 
-export default PureStateRedux();
+export default PureStateRedux;

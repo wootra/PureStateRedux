@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 //import DerivedStateSample from "./components/DeriveStateSample";
-import PureStateReduxTest from "./components/index";
+import PureStateReduxTest from "./components";
 
 class App extends Component {
   render() {

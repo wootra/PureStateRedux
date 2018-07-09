@@ -23,9 +23,16 @@ It worked for me well, but please let me know if there is some problem to use.
 - [How to use PureStateRedux](#how-to-use-purestateredux)
 - [actions/index.js](#actionsindexjs)
 - [reducers/index.js](#reducersindexjs)
+- [reduxHandler/index.js](#reduxhandlerindexjs)
+- [Register as a state receiver](#register-as-a-state-receiver)
+- [Send an action](#send-an-action)
 - [components/Sender.js](#componentssenderjs)
+- [Receive a state](#receive-a-state)
 - [components/Receiver.js](#componentsreceiverjs)
+- [How to Send and Receive from/to other state domain](#how-to-send-and-receive-from--to-other-state-domain)
 - [components/SendReceiver.js](#componentssendreceiverjs)
+- [How to Send and Receive from/to multiple state domain](#how-to-send-and-receive-from--to-multiple-state-domain)
+- [components/SendReceiverMultiDomain.js](#componentssendreceivermultidomainjs)
 - [components/index.js](#componentsindexjs)
 - [Something Missing?](#something-missing)
 
@@ -62,6 +69,7 @@ src/
     Receiver.js
     Sender.js
     SendReceiver.js
+    SendReceiverMultiDomain.js
     index.js
   pureStateRedux/
     index.js
@@ -186,6 +194,8 @@ Now we have two domains that share states of components separately.
 I will write down how to use two domains later. 
 Now Let's talk with DefaultRedux instance and how to use it.
 
+## Register as a state receiver
+
 To register your component as an action sender or state receiver, just call 'connect' function of PureStateRedux instance(DefaultRedux).
 in the connect function, there is three arguments.
 
@@ -205,6 +215,8 @@ instanceToUse is usually 'this' if you call connect function in the constructor.
 
 and addRunAction will be true if your component will use only one PureStateRedux domain. It will allow for your component to use this.runAction(action:function, arg:object) function. 
 But PureStateRedux support multiple state domains, so If your component will send an action to multiple state domains, you have to set this argument to false.
+
+## Send an action
 
 Here is a sample code so you can register your component as a action sender.
 ### `components/Sender.js`
@@ -246,6 +258,8 @@ export default class Sender extends Component{
 }
 ```
 
+## Receive a state
+
 And this is an example code that you can register your component as a state receiver. Note that this component used this.state.props.term state.
 onStateToProp function will change the state from a reducer, and it will pass to this.state.props state. In redux, it will be this.props.term, but in PureStateRedux, it will be this.state.props.term.
 
@@ -278,6 +292,8 @@ export default class Receiver extends Component{
     }
 }
 ```
+
+## How to Send and Receive from/to other state domain
 
 In PureStateRedux, state will be shared in each state domain. It means you cannot share the state if you are not belong to the same state domain.
 But Sending an action has no limitation whether or not your component belongs to any state domain.
@@ -328,6 +344,8 @@ export default class SendReceiver extends Component{
 ```
 
 In the SendReceiver.js file, the action invoked not related to the state domain that the component belongs to.
+
+## How to Send and Receive from/to multiple state domain
 
 PureStateRedux allows for a component to join multiple state domains. 
 
